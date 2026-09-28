@@ -19,49 +19,66 @@ class Product:
 
 
     def get_quantity(self):
-        """
-        Getter-Methode für die Menge.
-        Gibt die Menge (int) zurück.
-        """
-        pass
+        """Gibt die Menge (int) zurück."""
+        return self.quantity
+
 
     def set_quantity(self, quantity):
         """
-        Setter-Methode für die Menge. Wenn die Menge 0 erreicht,
-        wird das Produkt deaktiviert.
+        Ändert die Menge.
+        Wenn die Menge 0 erreicht, wird das Produkt deaktiviert.
+        Wenn die Menge negativ ist, wird eine Exception ausgelöst.
         """
-        pass
+        if quantity < 0:
+            raise ValueError("Quantity cannot be negative")
+
+        self.quantity = quantity
+
+        if quantity == 0:
+            self.active = False
+
 
     def is_active(self):
         """
-        Getter-Methode für aktiv.
         Gibt True zurück, wenn das Produkt aktiv ist, andernfalls False.
         """
-        pass
+        return self.active
+
 
     def activate(self):
         """Aktiviert das Produkt."""
-        pass
+        self.active = True
+
 
     def deactivate(self):
         """Deaktiviert das Produkt."""
-        pass
+        self.active = False
+
 
     def show(self):
         """
-        Gibt einen String, der das Produkt repräsentiert, auf der Konsole aus, z.B.:
-        "MacBook Air M2, Price: 1450, Quantity: 100"
+        Gibt einen String, der das Produkt repräsentiert, auf der Konsole aus.
         """
-        pass
+        print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
+
 
     def buy(self, quantity):
         """
         Kauft eine bestimmte Menge des Produkts.
         Gibt den Gesamtpreis (float) des Kaufs zurück.
         Aktualisiert die Produktmenge.
-        Bei Problemen (wann? darüber nachdenken), wird eine Ausnahme ausgelöst.
         """
-        pass
+
+        if quantity < 0:
+            raise ValueError("Quantity cannot be negative")
+        elif quantity == 0:
+            raise ValueError("Quantity must be at least 1")
+        elif quantity > self.quantity:
+            raise ValueError("Quantity not available")
+
+        self.set_quantity(self.quantity - quantity)
+
+        return self.price * quantity
 
 
 bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
