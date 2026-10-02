@@ -1,4 +1,7 @@
 class Product:
+    """
+    Repräsentiert ein Produkt und verwaltet dessen Eigenschaften und Status.
+    """
     def __init__(self, name, price, quantity):
         """
         Wenn etwas ungültig ist (leerer Name / negativer Preis oder Menge),
